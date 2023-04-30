@@ -1,0 +1,28 @@
+.wall-e .cls-1 {
+  fill: #fff;
+}
+
+.wall-e .cls-1,
+.wall-e .cls-2 {
+  stroke: #54596e;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+}
+
+.wall-e .cls-2,
+.wall-e .cls-3 {
+  fill: #54596e;
+}
+
+.wall-e .cls-3 {
+  opacity: 0.1;
+}
+
+.wall-e .cls-4 {
+  fill: #f99;
+}
+
+.wall-e .cls-5 {
+  fill: #55a6ff;
+}
