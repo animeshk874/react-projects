@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BOARD_SIZE } from "../../models/constants";
 import { TileData } from "../../models/tile";
-import { GameInitializer } from "../../utils/game.utils";
+import { GameInitializer, getFinalScore } from "../../utils/memory-match.utils";
 
 interface GameContextInterface {
   boardData?: TileData[][];
@@ -15,13 +15,15 @@ interface GameContextInterface {
   isScorecardOpen?: boolean;
   time?: number;
   setIsScorecardOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  isHelpModalOpen?: boolean;
+  setIsHelpModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  finalScore?: number;
 }
 
 export const GameContext = React.createContext<GameContextInterface>({});
 
 let timeoutId: NodeJS.Timeout | null;
 let intervalId: NodeJS.Timeout | null;
-
 export function GameProvider({
   children
 }: { children: JSX.Element }) {
@@ -34,11 +36,14 @@ export function GameProvider({
   const [moveCount, setMoveCount] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const [isScorecardOpen, setIsScorecardOpen] = useState<boolean>(false);
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState<boolean>(true);
+  const [finalScore, setFinalScore] = useState<number>(0);
 
   useEffect(() => {
     if(solvedTiles.length === (BOARD_SIZE * BOARD_SIZE)) {
       intervalId && clearInterval(intervalId);
       intervalId = null;
+      setFinalScore(getFinalScore(moveCount, time));
       setTimeout(() => {
         setIsGameSolved(true);
         setIsScorecardOpen(true);
@@ -85,7 +90,8 @@ export function GameProvider({
     setIsGameSolved(false);
     setIsGameStarted(false);
     setMoveCount(0);
-    setTime(0)
+    setTime(0);
+    setFinalScore(0);
   }
 
   return (
@@ -101,6 +107,9 @@ export function GameProvider({
         isScorecardOpen,
         time,
         setIsScorecardOpen,
+        isHelpModalOpen,
+        setIsHelpModalOpen,
+        finalScore,
       }}
     >
       {children}

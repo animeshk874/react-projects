@@ -1,20 +1,23 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { TileData } from '../../models/tile';
 import { getMinutesSecondsFromMillisecond } from '../../utils/time.utils';
-import { GameContext } from '../GameProvider/GameProvider';
+import { GameContext } from '../../Providers/GameProvider/GameProvider';
 import Modal from '../Modal/Modal.component';
 import ScoreCardModalComponent from './ScoreCardModal/ScoreCardModal.component';
 import TileComponent from './TileComponent/TileComponent';
+import HelpModal from './HelpModal/HelpModal.component';
 
 function MemoryMatchingGame() {
   const {
     boardData,
-    isGameSolved,
     moveCount,
     isScorecardOpen,
     resetBoard,
     time,
     setIsScorecardOpen,
+    isHelpModalOpen,
+    setIsHelpModalOpen,
+    finalScore
   } = useContext(GameContext);
 
   const formattedTime = useMemo(() => getMinutesSecondsFromMillisecond(time || 0), [time]);
@@ -29,10 +32,14 @@ function MemoryMatchingGame() {
             resetBoard?.();
             setIsScorecardOpen?.(false);
           }}
-          onCancel={() => {
+          onClose={() => {
             setIsScorecardOpen?.(false)
           }}
+          finalScore={finalScore}
         />
+      </Modal>
+      <Modal isModalOpen={!!isHelpModalOpen}>
+        <HelpModal onClose={() => setIsHelpModalOpen?.(false)} />
       </Modal>
       <div className='flex flex-col w-[480px] justify-between m-auto mt-8'>
         <div className='flex justify-between items-center'>

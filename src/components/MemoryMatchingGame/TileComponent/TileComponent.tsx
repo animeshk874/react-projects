@@ -3,7 +3,7 @@ import './TileComponent.css';
 import cn from 'classnames';
 import { TileData } from '../../../models/tile';
 import { Icon, iconsMapping } from '../../../models/icon-mapping';
-import { GameContext } from '../../GameProvider/GameProvider';
+import { GameContext } from '../../../Providers/GameProvider/GameProvider';
 
 function TileComponent({
   tileData
