@@ -36,7 +36,7 @@ export function GameProvider({
   const [moveCount, setMoveCount] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const [isScorecardOpen, setIsScorecardOpen] = useState<boolean>(false);
-  const [isHelpModalOpen, setIsHelpModalOpen] = useState<boolean>(true);
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState<boolean>(false);
   const [finalScore, setFinalScore] = useState<number>(0);
 
   useEffect(() => {
