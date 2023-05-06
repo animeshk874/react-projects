@@ -28,7 +28,7 @@ function TileComponent({
 
   return (
     <div className={cn(
-      'tile h-[104px] w-[104px] m-[8px]',
+      'tile h-[82px] w-[82px] m-[4px] sm:h-[104px] sm:w-[104px] sm:m-[8px]',
       {
         flip: isFlipped || isSolved,
         'shake-and-pop': isSolved,

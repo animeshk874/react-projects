@@ -41,8 +41,8 @@ function MemoryMatchingGame() {
       <Modal isModalOpen={!!isHelpModalOpen}>
         <HelpModal onClose={() => setIsHelpModalOpen?.(false)} />
       </Modal>
-      <div className='flex flex-col w-[480px] justify-between m-auto mt-8'>
-        <div className='flex justify-between items-center'>
+      <div className='flex flex-col w-[360px] sm:w-[480px] justify-between m-auto mt-8'>
+        <div className='flex justify-between items-center mb-4'>
           <div className='text-left ml-[8px]'>
             <span className='font-bold'>Moves:</span> {moveCount} <br />
             <span className='font-bold'>Time:</span> {formattedTime}
