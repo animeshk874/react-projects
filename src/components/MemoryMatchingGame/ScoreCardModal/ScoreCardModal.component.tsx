@@ -1,23 +1,26 @@
 import React, { useMemo } from 'react';
-import { getMinutesSecondsFromMillisecond } from '../../../utils/time.utils';
+import { getMemoryMatchFinalMessage } from '../../../utils/memory-match.utils';
 import './ScoreCardModal.css';
 
 interface ScoreCardModalProps {
   moves: number;
   formattedTime: string;
   onNewGame: () => void;
-  onCancel: () => void;
+  onClose: () => void;
+  finalScore?: number;
 }
 
 function ScoreCardModal({
   moves,
   formattedTime,
   onNewGame,
-  onCancel,
+  onClose,
+  finalScore = 0,
 }: ScoreCardModalProps) {
+  const finalMessage = useMemo(() => getMemoryMatchFinalMessage(finalScore), [finalScore]);
   return (
-    <div className="p-2 w-[400px] max-w-[95%]">
-    <div className="p-4">
+    <div className="p-2 w-[500px] m-4 max-w-[95%]">
+    <div className="px-4 pt-4 pb-0">
       <div className="w-full d-flex justify-content-center">
         <div className="modal-image w-[240px] m-auto">
           <svg xmlns="http://www.w3.org/2000/svg" className="wall-e" viewBox="0 0 64 64">
@@ -43,17 +46,17 @@ function ScoreCardModal({
           </svg>
         </div>
       </div>
-      <div className="mt-4 p-2 font-weight-light text-center">
-        Well done! You took 
-        <span className="font-semibold"> {moves} moves</span> and 
-        <span
-          className="font-semibold"> {formattedTime} minutes
-          </span>. 
-          But come on! You can definitely do better.
+      <div className="mt-4 p-2 font-weight-light text-left">
+        <p>Congratulations! You solved the puzzle!</p>
+        <p className='font-semibold'>Moves: <span className='font-normal'>{moves}</span></p>
+        <p className='font-semibold'>Time: <span className='font-normal'>{formattedTime} minutes</span></p>
+        <p className='mt-4 font-semibold text-lg'>Final Score: <span className='font-normal'>{finalScore}</span></p>
+        <p className='mt-4 text-lg font-semibold'>
+          {finalMessage}
+        </p>
         <div className="modal-button mt-3 text-center">
-          <button className="cursor-default m-2 px-[12px] py-[6px] bg-blue-500 text-white rounded-[4px] cursor-default font-semibold hover:bg-blue-600 duration-200" onClick={onNewGame}>Play Again<i
-              className="far fa-grin-hearts ml-2"></i></button>
-          <button className="cursor-default m-2 px-[12px] py-[6px] bg-white text-blue-500 rounded-[4px] cursor-default font-semibold hover:bg-gray-100 duration-200" onClick={onCancel}>Nah, I am done!</button>
+          <button className="cursor-default m-2 px-[12px] py-[6px] bg-blue-500 text-white rounded-[4px] cursor-default font-semibold hover:bg-blue-600 duration-200" onClick={onNewGame}>Play Again</button>
+          <button className="cursor-default m-2 px-[12px] py-[6px] bg-white text-blue-500 rounded-[4px] cursor-default font-semibold hover:bg-gray-100 duration-200" onClick={onClose}>Nah, I am done!</button>
         </div>
       </div>
     </div>

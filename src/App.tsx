@@ -7,7 +7,7 @@ import {
   Navigate
 } from "react-router-dom";
 import MemoryMatchingGame from './components/MemoryMatchingGame/MemoryMatchingGame';
-import { GameProvider } from './components/GameProvider/GameProvider';
+import { GameProvider } from './Providers/GameProvider/GameProvider';
 
 function App() {
   return (
